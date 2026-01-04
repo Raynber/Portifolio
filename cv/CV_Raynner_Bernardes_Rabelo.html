@@ -1,387 +1,317 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CV — Raynner Bernardes Rabelo</title>
   <style>
-    /* ---------- Base / Reset ---------- */
-    :root{
-      --bg: #ffffff;
-      --ink: #111827;
-      --muted: #4b5563;
-      --subtle: #6b7280;
-      --line: #e5e7eb;
-      --accent: #0f766e;
-      --sidebar: #0b1220;
-      --sidebar-ink: #e5e7eb;
-      --sidebar-muted: #a7b0c0;
-      --chip: rgba(255,255,255,.10);
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica, "Noto Sans", "Liberation Sans", sans-serif;
+    /* ===== Existing base styling (kept) ===== */
+    :root {
+      --bg: #f5f6fa;
+      --page-bg: #ffffff;
+      --text: #1f2a37;
+      --muted: #5b6776;
+      --accent: #1f6feb;
+      --sidebar-bg: #0b1220;
+      --sidebar-text: #e6edf3;
+      --sidebar-muted: #a6b0bf;
+      --border: #e6e8ee;
     }
 
-    *{ box-sizing: border-box; }
-    html, body{ height: 100%; }
-    body{
+    * { box-sizing: border-box; }
+
+    body {
       margin: 0;
-      background: #f3f4f6;
-      color: var(--ink);
-      font-family: var(--font);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
       line-height: 1.35;
     }
 
-    a{ color: inherit; text-decoration: none; }
-    a:hover{ text-decoration: underline; }
-    ul{ margin: 0.35rem 0 0.75rem; padding-left: 1.05rem; }
-    li{ margin: 0.18rem 0; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    /* ---------- Page ---------- */
-    .page{
+    /* A4 page container */
+    .page {
       width: 210mm;
       min-height: 297mm;
-      margin: 12mm auto;
-      background: var(--bg);
-      box-shadow: 0 10px 28px rgba(0,0,0,.15);
+      margin: 16px auto;
+      background: var(--page-bg);
+      border: 1px solid var(--border);
       display: grid;
-      grid-template-columns: 72mm 1fr;
+      grid-template-columns: 78mm 1fr;
+      gap: 0;
     }
 
-    /* ---------- Sidebar ---------- */
-    .sidebar{
-      background: var(--sidebar);
-      color: var(--sidebar-ink);
-      padding: 12mm 10mm;
+    .sidebar {
+      background: var(--sidebar-bg);
+      color: var(--sidebar-text);
+      padding: 20mm 14mm;
     }
 
-    .name{
-      font-size: 18pt;
-      font-weight: 800;
-      letter-spacing: .04em;
+    .sidebar h1 {
+      margin: 0 0 2mm;
+      font-size: 20px;
+      line-height: 1.15;
+      letter-spacing: .2px;
+    }
+
+    .sidebar .title {
+      margin: 0 0 10mm;
+      color: var(--sidebar-muted);
+      font-size: 12px;
+    }
+
+    .sidebar .block { margin: 0 0 10mm; }
+
+    .sidebar .block h2 {
+      margin: 0 0 3mm;
+      font-size: 12px;
+      letter-spacing: .6px;
       text-transform: uppercase;
+      color: var(--sidebar-text);
+    }
+
+    .sidebar .block p,
+    .sidebar .block li,
+    .sidebar .block a {
+      font-size: 11.5px;
+      color: var(--sidebar-text);
+    }
+
+    .sidebar .block ul { margin: 0; padding-left: 18px; }
+
+    .sidebar .muted { color: var(--sidebar-muted); }
+    .sidebar a { color: var(--sidebar-text); text-decoration: underline; }
+
+    .content {
+      padding: 18mm 16mm;
+    }
+
+    .section { margin: 0 0 10mm; }
+
+    .section h2 {
+      margin: 0 0 4mm;
+      font-size: 13px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .section p { margin: 0 0 3mm; color: var(--muted); }
+
+    .job {
+      margin: 0 0 7mm;
+      padding: 0 0 7mm;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .job:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .job .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      align-items: baseline;
       margin: 0 0 2mm;
     }
 
-    .meta{
-      font-size: 10.5pt;
-      color: var(--sidebar-muted);
-      margin: 0 0 3mm;
-    }
+    .job .company { font-weight: 700; color: var(--text); }
+    .job .role { font-weight: 600; color: var(--text); }
+    .job .period { color: var(--muted); font-size: 12px; }
 
-    .meta strong{ color: var(--sidebar-ink); font-weight: 700; }
+    .job ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    .job li { margin: 0 0 2mm; }
 
-    .contact{
-      margin: 4mm 0 8mm;
-      padding-top: 4mm;
-      border-top: 1px solid rgba(255,255,255,.14);
-      font-size: 10.5pt;
-      color: var(--sidebar-muted);
-    }
-    .contact div{ margin: 1.2mm 0; }
+    /* ===== Print rules (added) ===== */
+    @media print {
+      body { background: #fff; }
 
-    .sb-section{
-      margin: 6mm 0 0;
-      break-inside: avoid;
-      page-break-inside: avoid;
-    }
-
-    .sb-title{
-      font-size: 10.5pt;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--sidebar-ink);
-      margin: 0 0 2.5mm;
-      padding-top: 2.5mm;
-      border-top: 1px solid rgba(255,255,255,.14);
-    }
-
-    .project{
-      margin: 0 0 3.2mm;
-      padding: 2.6mm 3mm;
-      background: var(--chip);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 6px;
-    }
-
-    .project b{ display: block; color: var(--sidebar-ink); font-size: 10.6pt; }
-    .project span{ display: block; color: var(--sidebar-muted); font-size: 9.8pt; margin-top: 1mm; }
-
-    .chips{ display: flex; flex-wrap: wrap; gap: 1.8mm; }
-    .chip{
-      display: inline-block;
-      padding: 1.6mm 2.4mm;
-      border-radius: 999px;
-      background: var(--chip);
-      border: 1px solid rgba(255,255,255,.10);
-      color: var(--sidebar-ink);
-      font-size: 9.6pt;
-      white-space: nowrap;
-    }
-
-    .sb-list{ margin: 0.5mm 0 0; padding-left: 1.05rem; color: var(--sidebar-muted); font-size: 10.2pt; }
-
-    .links a{ color: var(--sidebar-ink); }
-    .links .hint{ color: var(--sidebar-muted); font-size: 9.8pt; display: block; margin-top: 1mm; word-break: break-word; }
-
-    /* ---------- Main content ---------- */
-    .main{
-      padding: 12mm 12mm;
-      border-left: 1px solid var(--line);
-    }
-
-    .headline{
-      margin: 0 0 4mm;
-      padding-bottom: 4mm;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .objective{
-      font-size: 11.2pt;
-      color: var(--ink);
-      margin: 0;
-    }
-
-    .section{ margin: 6mm 0 0; break-inside: avoid; page-break-inside: avoid; }
-
-    .title{
-      margin: 0 0 2.5mm;
-      font-size: 11.2pt;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--accent);
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1.8mm;
-    }
-
-    .p{ margin: 0 0 2.5mm; color: var(--muted); font-size: 10.8pt; }
-
-    .job{
-      margin: 0 0 4.5mm;
-      padding: 3mm 3.2mm;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      break-inside: avoid;
-      page-break-inside: avoid;
-    }
-
-    .job-head{
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 2mm;
-      align-items: baseline;
-    }
-
-    .job-title{ margin: 0; font-size: 11pt; font-weight: 800; color: var(--ink); }
-    .job-where{ margin: 0.6mm 0 0; font-size: 10.2pt; color: var(--subtle); }
-    .job-date{ margin: 0; font-size: 10.2pt; color: var(--subtle); white-space: nowrap; }
-
-    .edu{
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 2mm;
-      padding: 2.6mm 0;
-      border-bottom: 1px dashed var(--line);
-      break-inside: avoid;
-      page-break-inside: avoid;
-    }
-    .edu:last-child{ border-bottom: 0; }
-    .edu b{ color: var(--ink); }
-    .edu span{ color: var(--subtle); }
-
-    /* ---------- Printing (A4) ---------- */
-    @page{
-      size: A4;
-      margin: 10mm;
-    }
-
-    @media print{
-      body{ background: #fff; }
-      .page{
+      .page {
         margin: 0;
+        border: 0;
+        width: 210mm;
+        min-height: 297mm;
         box-shadow: none;
-        width: auto;
-        min-height: auto;
+        page-break-inside: avoid;
       }
-      a{ text-decoration: none; }
+
+      /* Force the second (and subsequent) .page to start on a new printed page */
+      .page + .page {
+        break-before: page;
+        page-break-before: always; /* legacy */
+      }
+
+      a { color: #000; text-decoration: underline; }
     }
   </style>
 </head>
 <body>
-  <main class="page" role="document" aria-label="Currículo">
-    <!-- LEFT SIDEBAR -->
+  <!-- ===================== PAGE 1 ===================== -->
+  <div class="page">
+    <!-- Sidebar (repeated on page 2 as requested) -->
     <aside class="sidebar">
-      <h1 class="name">RAYNNER BERNARDES RABELO</h1>
-      <p class="meta"><strong>Goiânia – GO</strong> • Presencial</p>
+      <h1>Raynner Bernardes Rabelo</h1>
+      <p class="title">Desenvolvedor / QA</p>
 
-      <div class="contact" aria-label="Contato">
-        <div><strong>Telefone:</strong> (62) 99451-3277</div>
-        <div><strong>E-mail:</strong> raynner94@gmail.com</div>
+      <div class="block">
+        <h2>Contato</h2>
+        <p>
+          <span class="muted">Localidade:</span> Brasil<br />
+          <span class="muted">E-mail:</span> <a href="mailto:raynber@gmail.com">raynber@gmail.com</a><br />
+          <span class="muted">LinkedIn:</span> <a href="https://www.linkedin.com/in/raynber" target="_blank" rel="noreferrer">linkedin.com/in/raynber</a><br />
+          <span class="muted">GitHub:</span> <a href="https://github.com/Raynber" target="_blank" rel="noreferrer">github.com/Raynber</a>
+        </p>
       </div>
 
-      <section class="sb-section" aria-label="Projetos">
-        <h2 class="sb-title">Projetos</h2>
-        <div class="project">
-          <b>Pix (Cobrança e QR Code Dinâmico)</b>
-          <span>API Pix dinâmico via REST HTTP/JSON</span>
-        </div>
-        <div class="project">
-          <b>Conciliação Bancária (multi-bancos)</b>
-          <span>via APIs and/or arquivos</span>
-        </div>
-        <div class="project">
-          <b>Conciliação de Cartões (multi-adquirentes)</b>
-          <span>via API e arquivos</span>
-        </div>
-        <div class="project">
-          <b>Boleto Online</b>
-          <span>via API REST HTTP POST/JSON</span>
-        </div>
-        <div class="project">
-          <b>Borderô &amp; CNAB</b>
-          <span>CNAB 240 and 400</span>
-        </div>
-      </section>
-
-      <section class="sb-section" aria-label="Competências">
-        <h2 class="sb-title">Competências</h2>
-        <div class="chips" aria-label="Competências principais">
-          <span class="chip">Backend: Delphi</span>
-          <span class="chip">C# .NET</span>
-          <span class="chip">Java</span>
-          <span class="chip">PHP</span>
-          <span class="chip">Frontend: JS</span>
-          <span class="chip">HTML5</span>
-          <span class="chip">CSS3</span>
-          <span class="chip">Fintech: Pix/Boleto/REST</span>
-          <span class="chip">PostgreSQL</span>
-          <span class="chip">SQL Server</span>
-          <span class="chip">Sybase</span>
-          <span class="chip">MySQL</span>
-          <span class="chip">Procedures/Triggers/Functions</span>
-          <span class="chip">Otimização de queries</span>
-          <span class="chip">Power BI</span>
-          <span class="chip">Excel</span>
-          <span class="chip">Crystal Reports</span>
-          <span class="chip">Fast Reports</span>
-          <span class="chip">DRE</span>
-          <span class="chip">Orçamento/Forecast</span>
-          <span class="chip">Infra: servidores/redes/CFTV</span>
-        </div>
-      </section>
-
-      <section class="sb-section" aria-label="Idiomas">
-        <h2 class="sb-title">Idiomas</h2>
-        <ul class="sb-list">
-          <li>Português — Nativo</li>
-          <li>Espanhol — Intermediário (vivência no exterior)</li>
-          <li>Inglês — Técnico</li>
+      <div class="block">
+        <h2>Principais Competências</h2>
+        <ul>
+          <li>Quality Assurance (QA)</li>
+          <li>Testes Funcionais e Automatizados</li>
+          <li>Testes de API (Postman)</li>
+          <li>Testes E2E (Cypress)</li>
+          <li>SQL / Banco de Dados</li>
+          <li>Scrum / Kanban</li>
         </ul>
-      </section>
+      </div>
 
-      <section class="sb-section links" aria-label="Links">
-        <h2 class="sb-title">Links</h2>
-        <div>
-          <a href="https://linkedin.com/in/raynner-bernardes" target="_blank" rel="noreferrer">LinkedIn</a>
-          <span class="hint">https://linkedin.com/in/raynner-bernardes</span>
-        </div>
-        <div style="margin-top:2.2mm">
-          <a href="https://github.com/Raynber" target="_blank" rel="noreferrer">GitHub</a>
-          <span class="hint">https://github.com/Raynber</span>
-        </div>
-      </section>
+      <div class="block">
+        <h2>Tecnologias</h2>
+        <p>
+          Cypress • Postman • Git • GitHub •
+          JavaScript • HTML • CSS • SQL
+        </p>
+      </div>
     </aside>
 
-    <!-- RIGHT MAIN COLUMN -->
-    <section class="main">
-      <header class="headline" aria-label="Objetivo">
-        <p class="objective"><strong>OBJETIVO:</strong> Desenvolvedor de Software / Full Stack (Delphi e .NET) — Fintech, integrações de pagamentos e dados (SQL/BI).</p>
-      </header>
-
-      <section class="section" aria-label="Resumo profissional">
-        <h2 class="title">Resumo Profissional</h2>
-        <p class="p">Desenvolvedor de Software / Full Stack com experiência sólida em Delphi e C# (.NET), com foco em integrações financeiras via API (Pix, Boleto Online), rotinas de pagamento (Borderô / CNAB 240 e 400) e entregas de dados e relatórios (DRE por caixa/competência, BI). Histórico de atuação em ambientes críticos, incluindo suporte N3 e liderança técnica interina, além de experiência em implementação/atendimento a clientes. Vivência no exterior com Espanhol intermediário e Inglês técnico.</p>
+    <main class="content">
+      <section class="section" id="objetivo">
+        <h2>Objetivo</h2>
+        <p>
+          Atuar como QA / Desenvolvedor, contribuindo com qualidade, automação e melhoria contínua.
+        </p>
       </section>
 
-      <section class="section" aria-label="Experiência">
-        <h2 class="title">Experiência</h2>
+      <section class="section" id="resumo-profissional">
+        <h2>Resumo Profissional</h2>
+        <p>
+          Experiência em testes manuais e automatizados, com foco em qualidade de software,
+          colaboração com times ágeis e elaboração de cenários e evidências.
+        </p>
+      </section>
 
+      <section class="section" id="experiencia">
+        <h2>Experiência</h2>
+
+        <!-- Se7e role #1 (2024–Atual) -->
         <article class="job">
-          <div class="job-head">
-            <div>
-              <p class="job-title">Se7e Sistemas — Desenvolvedor</p>
-              <p class="job-where">Goiânia-GO • Presencial</p>
-            </div>
-            <p class="job-date">2024–Atual</p>
+          <div class="meta">
+            <div class="company">Se7e</div>
+            <div class="role">Quality Assurance</div>
+            <div class="period">2024 – Atual</div>
           </div>
           <ul>
-            <li>Desenvolvimento e manutenção de soluções com Delphi e C# (.NET) voltadas para integrações financeiras e rotinas de pagamento.</li>
-            <li>Integrações via API REST (HTTP/JSON) para Pix e Boleto Online, com foco em estabilidade, rastreabilidade e suporte a produção.</li>
-            <li>Implementação e evolução de conciliações bancárias e de cartões (multi-bancos e multi-adquirentes), via APIs e/ou arquivos.</li>
+            <li>Planejamento e execução de testes funcionais.</li>
+            <li>Criação e manutenção de testes automatizados (Cypress).</li>
+            <li>Testes de API e apoio na documentação de fluxos.</li>
           </ul>
         </article>
 
+        <!-- Se7e role #2 (2022–2024) -->
         <article class="job">
-          <div class="job-head">
-            <div>
-              <p class="job-title">Se7e Sistemas — Analista N3 / Liderança Técnica interino</p>
-              <p class="job-where">Goiânia-GO • Presencial</p>
-            </div>
-            <p class="job-date">2022–2024</p>
+          <div class="meta">
+            <div class="company">Se7e</div>
+            <div class="role">Analista de Testes / QA</div>
+            <div class="period">2022 – 2024</div>
           </div>
           <ul>
-            <li>Atuação em suporte N3 e ambientes críticos, realizando análise de incidentes, correções e apoio em releases.</li>
-            <li>Liderança técnica interina, apoiando priorização, revisão de entregas e padronização de soluções.</li>
-            <li>Apoio em demandas de dados e relatórios (DRE por caixa/competência, BI) e otimização de consultas SQL.</li>
-          </ul>
-        </article>
-
-        <article class="job">
-          <div class="job-head">
-            <div>
-              <p class="job-title">Se7e Sistemas — Gestor Comercial e Implementação</p>
-              <p class="job-where">Goiânia-GO • Presencial</p>
-            </div>
-            <p class="job-date">2016–2022</p>
-          </div>
-          <ul>
-            <li>Implementação e atendimento a clientes, com levantamento de requisitos, parametrizações e suporte à operação.</li>
-            <li>Atuação em rotinas financeiras e integrações, alinhando necessidades de negócio, prazos e entregas técnicas.</li>
-            <li>Relacionamento com clientes e áreas internas para garantir qualidade, adesão e continuidade das soluções.</li>
-          </ul>
-        </article>
-
-        <article class="job">
-          <div class="job-head">
-            <div>
-              <p class="job-title">World Tênis — Suporte Técnico de Infraestrutura</p>
-              <p class="job-where">Goiânia-GO • Presencial</p>
-            </div>
-            <p class="job-date">2012–2014</p>
-          </div>
-          <ul>
-            <li>Suporte a infraestrutura (servidores, redes e CFTV), garantindo disponibilidade e continuidade operacional.</li>
-            <li>Atendimento a usuários e manutenção preventiva/corretiva de equipamentos e serviços.</li>
+            <li>Definição de cenários e casos de teste.</li>
+            <li>Validação de correções e suporte à equipe de desenvolvimento.</li>
+            <li>Participação ativa em cerimônias ágeis e melhoria de processos.</li>
           </ul>
         </article>
       </section>
+    </main>
+  </div>
 
-      <section class="section" aria-label="Formação">
-        <h2 class="title">Formação</h2>
-        <div class="edu">
-          <div>
-            <b>Sistemas de Informação — Faculdade Camburi</b><br />
-            <span>Goiânia–GO</span>
+  <!-- ===================== PAGE 2 ===================== -->
+  <div class="page">
+    <!-- Sidebar repeated -->
+    <aside class="sidebar">
+      <h1>Raynner Bernardes Rabelo</h1>
+      <p class="title">Desenvolvedor / QA</p>
+
+      <div class="block">
+        <h2>Contato</h2>
+        <p>
+          <span class="muted">Localidade:</span> Brasil<br />
+          <span class="muted">E-mail:</span> <a href="mailto:raynber@gmail.com">raynber@gmail.com</a><br />
+          <span class="muted">LinkedIn:</span> <a href="https://www.linkedin.com/in/raynber" target="_blank" rel="noreferrer">linkedin.com/in/raynber</a><br />
+          <span class="muted">GitHub:</span> <a href="https://github.com/Raynber" target="_blank" rel="noreferrer">github.com/Raynber</a>
+        </p>
+      </div>
+
+      <div class="block">
+        <h2>Principais Competências</h2>
+        <ul>
+          <li>Quality Assurance (QA)</li>
+          <li>Testes Funcionais e Automatizados</li>
+          <li>Testes de API (Postman)</li>
+          <li>Testes E2E (Cypress)</li>
+          <li>SQL / Banco de Dados</li>
+          <li>Scrum / Kanban</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Tecnologias</h2>
+        <p>
+          Cypress • Postman • Git • GitHub •
+          JavaScript • HTML • CSS • SQL
+        </p>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="section" id="experiencia-cont">
+        <h2>Experiência (continuação)</h2>
+
+        <!-- Se7e role #3 (2016–2022) -->
+        <article class="job">
+          <div class="meta">
+            <div class="company">Se7e</div>
+            <div class="role">Suporte / Operações</div>
+            <div class="period">2016 – 2022</div>
           </div>
-          <div><span>2013–2015</span></div>
-        </div>
-        <div class="edu">
-          <div>
-            <b>ADS — Estácio</b><br />
-            <span>Goiânia–GO</span>
+          <ul>
+            <li>Atendimento, triagem e suporte a incidentes e demandas.</li>
+            <li>Interação com áreas internas para resolução de problemas.</li>
+            <li>Apoio em rotinas de operação e melhoria contínua.</li>
+          </ul>
+        </article>
+
+        <!-- World Tênis -->
+        <article class="job">
+          <div class="meta">
+            <div class="company">World Tênis</div>
+            <div class="role">Vendas / Atendimento</div>
+            <div class="period">(Período conforme CV)</div>
           </div>
-          <div><span>2024–2026 (previsão)</span></div>
-        </div>
+          <ul>
+            <li>Atendimento ao cliente e suporte ao processo de vendas.</li>
+            <li>Organização de loja e apoio ao time.</li>
+          </ul>
+        </article>
       </section>
-    </section>
-  </main>
+
+      <section class="section" id="formacao">
+        <h2>Formação</h2>
+        <p>
+          (Conteúdo conforme CV)
+        </p>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
