@@ -1,335 +1,217 @@
-<!--
-  CV_Raynner_Bernardes_Rabelo.html
-  This file keeps the original CV HTML content provided by the user and splits it
-  into two A4 pages for clean PDF export/printing.
--->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Currículo - Raynner Bernardes Rabelo</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV — Raynner Bernardes Rabelo</title>
   <style>
     :root{
-      --page-width: 210mm;
-      --page-height: 297mm;
-      --sidebar-width: 70mm;
-      --gap: 10mm;
-      --text: #1f2937;
-      --muted: #4b5563;
       --bg: #ffffff;
-      --sidebar-bg: #0f172a;
-      --sidebar-text: #e5e7eb;
-      --accent: #38bdf8;
+      --ink: #111827;
+      --muted: #4b5563;
+      --subtle: #6b7280;
+      --line: #e5e7eb;
+      --accent: #0f766e;
+      --sidebar: #0b1220;
+      --sidebar-ink: #e5e7eb;
+      --sidebar-muted: #a7b0c0;
+      --chip: rgba(255,255,255,.10);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica, "Noto Sans", "Liberation Sans", sans-serif;
     }
 
     *{ box-sizing: border-box; }
-
+    
     body{
       margin: 0;
-      padding: 20px;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
       background: #f3f4f6;
+      color: var(--ink);
+      font-family: var(--font);
+      line-height: 1.35;
     }
 
-    /* A4 page container */
-    .page{
-      width: var(--page-width);
-      min-height: var(--page-height);
-      margin: 0 auto 20px;
+    a{ color: inherit; text-decoration: none; }
+    ul{ margin: 0.35rem 0 0.75rem; padding-left: 1.05rem; }
+    li{ margin: 0.18rem 0; }
+
+    /* Estreutura de Páginas */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
       background: var(--bg);
+      box-shadow: 0 10px 28px rgba(0,0,0,.15);
       display: grid;
-      grid-template-columns: var(--sidebar-width) 1fr;
-      gap: var(--gap);
-      padding: 0;
-      box-shadow: 0 10px 25px rgba(0,0,0,.10);
+      grid-template-columns: 72mm 1fr;
+      position: relative;
       overflow: hidden;
+      page-break-after: always; /* Força nova página no print */
     }
 
+    /* Barra Lateral */
     .sidebar{
-      background: var(--sidebar-bg);
-      color: var(--sidebar-text);
-      padding: 18mm 12mm;
+      background: var(--sidebar);
+      color: var(--sidebar-ink);
+      padding: 12mm 10mm;
     }
 
-    .sidebar h1{
-      margin: 0 0 6mm;
-      font-size: 20px;
-      line-height: 1.2;
-      letter-spacing: .3px;
-    }
+    .name{ font-size: 18pt; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; margin: 0 0 2mm; }
+    .meta{ font-size: 10.5pt; color: var(--sidebar-muted); margin: 0 0 3mm; }
+    .contact{ margin: 4mm 0 8mm; padding-top: 4mm; border-top: 1px solid rgba(255,255,255,.14); font-size: 10.5pt; color: var(--sidebar-muted); }
+    
+    .sb-section{ margin: 6mm 0 0; }
+    .sb-title{ font-size: 10.5pt; letter-spacing: .08em; text-transform: uppercase; color: var(--sidebar-ink); margin: 0 0 2.5mm; padding-top: 2.5mm; border-top: 1px solid rgba(255,255,255,.14); }
 
-    .sidebar .role{
-      margin: 0 0 10mm;
-      font-size: 13px;
-      color: #cbd5e1;
-    }
+    .project{ margin: 0 0 3.2mm; padding: 2.6mm 3mm; background: var(--chip); border: 1px solid rgba(255,255,255,.10); border-radius: 6px; }
+    .project b{ display: block; color: var(--sidebar-ink); font-size: 10.6pt; }
+    .project span{ display: block; color: var(--sidebar-muted); font-size: 9.8pt; margin-top: 1mm; }
 
-    .sidebar h2{
-      margin: 8mm 0 3mm;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: #cbd5e1;
-    }
+    .chips{ display: flex; flex-wrap: wrap; gap: 1.8mm; }
+    .chip{ display: inline-block; padding: 1.4mm 2mm; border-radius: 999px; background: var(--chip); border: 1px solid rgba(255,255,255,.10); color: var(--sidebar-ink); font-size: 8.5pt; }
 
-    .sidebar p,
-    .sidebar li{
-      font-size: 12px;
-      line-height: 1.4;
-      color: var(--sidebar-text);
-      margin: 0;
-    }
+    /* Conteúdo Principal */
+    .main{ padding: 12mm 12mm; border-left: 1px solid var(--line); }
+    .headline{ margin: 0 0 4mm; padding-bottom: 4mm; border-bottom: 1px solid var(--line); }
+    .objective{ font-size: 11.2pt; font-weight: bold; }
+    
+    .title{ margin: 0 0 2.5mm; font-size: 11.2pt; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--line); padding-bottom: 1.8mm; }
+    .job{ margin: 0 0 4.5mm; padding: 3mm 3.2mm; border: 1px solid var(--line); border-radius: 8px; }
+    .job-head{ display: grid; grid-template-columns: 1fr auto; align-items: baseline; }
+    .job-title{ margin: 0; font-size: 11pt; font-weight: 800; color: var(--ink); }
+    .job-date{ font-size: 10.2pt; color: var(--subtle); }
 
-    .sidebar ul{
-      margin: 2mm 0 0;
-      padding-left: 16px;
-    }
+    .edu{ display: grid; grid-template-columns: 1fr auto; padding: 2.6mm 0; border-bottom: 1px dashed var(--line); }
 
-    .sidebar a{ color: #bae6fd; text-decoration: none; }
-
-    .content{
-      padding: 18mm 14mm;
-    }
-
-    .content h2{
-      margin: 0 0 4mm;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: #0f172a;
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 2mm;
-    }
-
-    .content p{ margin: 0 0 4mm; color: var(--muted); font-size: 12px; line-height: 1.5; }
-
-    .block{ margin-bottom: 8mm; }
-
-    .job{
-      margin-bottom: 6mm;
-      padding-bottom: 6mm;
-      border-bottom: 1px solid #e5e7eb;
-    }
-    .job:last-child{ border-bottom: none; padding-bottom: 0; }
-
-    .job .top{
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .job .title{ font-weight: 700; font-size: 12.5px; color: #111827; }
-    .job .company{ font-weight: 600; font-size: 12px; color: #334155; }
-    .job .date{ font-size: 11px; color: #6b7280; }
-
-    .job ul{ margin: 2.5mm 0 0; padding-left: 18px; }
-    .job li{ margin: 0 0 2mm; color: var(--muted); font-size: 12px; line-height: 1.45; }
-
-    .skills-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
-    .tag{ font-size: 11.5px; color: #111827; background: #e0f2fe; border: 1px solid #bae6fd; padding: 3px 6px; border-radius: 999px; display: inline-block; }
-
-    /* Print/PDF rules */
+    /* Ajustes para Impressão */
     @media print{
-      body{ background: #fff; padding: 0; }
-      .page{ margin: 0; box-shadow: none; }
-      .page + .page{ break-before: page; page-break-before: always; }
-
-      /* Avoid splitting key blocks */
-      .sidebar,
-      .block,
-      .job,
-      .job ul,
-      .job li{
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-
-      /* Make colors print-friendly */
-      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body{ background: #fff; }
+      .page{ margin: 0; box-shadow: none; width: 210mm; height: 297mm; }
     }
   </style>
 </head>
 <body>
 
-  <!-- PAGE 1 -->
-  <div class="page">
+  <main class="page">
     <aside class="sidebar">
-      <h1>Raynner Bernardes Rabelo</h1>
-      <p class="role">Desenvolvedor Full Stack</p>
+      <h1 class="name">RAYNNER BERNARDES</h1>
+      <p class="meta"><strong>Goiânia – GO</strong></p>
+      <div class="contact">
+        <div>(62) 99451-3277</div>
+        <div>raynner94@gmail.com</div>
+      </div>
 
-      <h2>Contato</h2>
-      <p>Uberlândia - MG</p>
-      <p><a href="mailto:raynner.rabelo@gmail.com">raynner.rabelo@gmail.com</a></p>
-      <p><a href="tel:+5534999999999">+55 (34) 99999-9999</a></p>
-      <p><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></p>
-      <p><a href="https://github.com/Raynber" target="_blank" rel="noopener">GitHub</a></p>
+      <section class="sb-section">
+        <h2 class="sb-title">Competências</h2>
+        <div class="chips">
+          <span class="chip">Delphi</span> <span class="chip">C# .NET</span>
+          <span class="chip">PostgreSQL</span> <span class="chip">SQL Server</span>
+          <span class="chip">REST API</span> <span class="chip">Pix/Boleto</span>
+          <span class="chip">Power BI</span> <span class="chip">Fast Reports</span>
+        </div>
+      </section>
 
-      <h2>Competências</h2>
-      <ul>
-        <li>JavaScript / TypeScript</li>
-        <li>Node.js</li>
-        <li>React</li>
-        <li>HTML / CSS</li>
-        <li>SQL</li>
-        <li>Git</li>
-      </ul>
-
-      <h2>Idiomas</h2>
-      <ul>
-        <li>Português (Nativo)</li>
-        <li>Inglês (Intermediário)</li>
-      </ul>
+      <section class="sb-section">
+        <h2 class="sb-title">Projetos</h2>
+        <div class="project"><b>Pix Dinâmico</b><span>API Rest HTTP/JSON</span></div>
+        <div class="project"><b>Conciliação</b><span>Multi-bancos/cartões</span></div>
+      </section>
     </aside>
 
-    <main class="content">
-      <section class="block">
-        <h2>Resumo</h2>
-        <p>
-          Desenvolvedor Full Stack com foco em construir aplicações web modernas, escaláveis e com boa experiência de usuário.
-          Experiência com desenvolvimento front-end e back-end, integração de APIs e boas práticas de versionamento.
-        </p>
+    <section class="main">
+      <header class="headline">
+        <p class="objective">OBJETIVO: Desenvolvedor Full Stack (Delphi e .NET)</p>
+      </header>
+
+      <section class="section">
+        <h2 class="title">Resumo Profissional</h2>
+        <p>Desenvolvedor com sólida experiência em integrações financeiras (Pix, Boletos) e rotinas de pagamento. Especialista em Delphi e C#, com foco em ambientes críticos, suporte N3 e análise de dados (BI/DRE).</p>
       </section>
 
-      <section class="block">
-        <h2>Experiência</h2>
-
-        <!-- Keep the original content order; move last two jobs to page 2 -->
-        <div class="job">
-          <div class="top">
-            <div>
-              <div class="title">Desenvolvedor Full Stack</div>
-              <div class="company">Empresa A</div>
-            </div>
-            <div class="date">2023 - Atual</div>
+      <section class="section">
+        <h2 class="title">Experiência Atual</h2>
+        <article class="job">
+          <div class="job-head">
+            <p class="job-title">Se7e Sistemas — Desenvolvedor</p>
+            <p class="job-date">2024–Atual</p>
           </div>
           <ul>
-            <li>Desenvolvimento e manutenção de funcionalidades em aplicações web.</li>
-            <li>Integração com APIs REST e melhoria de performance.</li>
-            <li>Colaboração com time para entrega contínua e revisão de código.</li>
+            <li>Desenvolvimento de soluções financeiras em Delphi e C#.</li>
+            <li>Integrações de APIs de pagamento (Pix/Boleto Online).</li>
+            <li>Manutenção de sistemas de conciliação bancária.</li>
           </ul>
-        </div>
+        </article>
 
-        <div class="job">
-          <div class="top">
-            <div>
-              <div class="title">Desenvolvedor Front-End</div>
-              <div class="company">Empresa B</div>
-            </div>
-            <div class="date">2021 - 2023</div>
+        <article class="job">
+          <div class="job-head">
+            <p class="job-title">Analista N3 / Liderança Técnica</p>
+            <p class="job-date">2022–2024</p>
           </div>
           <ul>
-            <li>Criação de interfaces responsivas e componentizadas.</li>
-            <li>Implementação de boas práticas de acessibilidade e SEO.</li>
-            <li>Integração com serviços externos e testes básicos.</li>
+            <li>Liderança técnica interina e suporte a incidentes críticos.</li>
+            <li>Otimização de consultas SQL e relatórios gerenciais (DRE).</li>
           </ul>
-        </div>
-
+        </article>
       </section>
+    </section>
+  </main>
 
-      <section class="block">
-        <h2>Projetos</h2>
-        <p><strong>Projeto 1:</strong> Aplicação web com autenticação, dashboard e integração com APIs.</p>
-        <p><strong>Projeto 2:</strong> Portfólio responsivo com otimizações de performance e SEO.</p>
-      </section>
-    </main>
-  </div>
-
-  <!-- PAGE 2 -->
-  <div class="page">
+  <main class="page">
     <aside class="sidebar">
-      <!-- duplicated sidebar for page 2 -->
-      <h1>Raynner Bernardes Rabelo</h1>
-      <p class="role">Desenvolvedor Full Stack</p>
+      <section class="sb-section">
+        <h2 class="sb-title">Idiomas</h2>
+        <ul style="list-style: none; padding: 0; font-size: 10pt; color: var(--sidebar-muted);">
+          <li>• Português (Nativo)</li>
+          <li>• Espanhol (Intermediário)</li>
+          <li>• Inglês (Técnico)</li>
+        </ul>
+      </section>
 
-      <h2>Contato</h2>
-      <p>Uberlândia - MG</p>
-      <p><a href="mailto:raynner.rabelo@gmail.com">raynner.rabelo@gmail.com</a></p>
-      <p><a href="tel:+5534999999999">+55 (34) 99999-9999</a></p>
-      <p><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></p>
-      <p><a href="https://github.com/Raynber" target="_blank" rel="noopener">GitHub</a></p>
-
-      <h2>Competências</h2>
-      <ul>
-        <li>JavaScript / TypeScript</li>
-        <li>Node.js</li>
-        <li>React</li>
-        <li>HTML / CSS</li>
-        <li>SQL</li>
-        <li>Git</li>
-      </ul>
-
-      <h2>Idiomas</h2>
-      <ul>
-        <li>Português (Nativo)</li>
-        <li>Inglês (Intermediário)</li>
-      </ul>
+      <section class="sb-section">
+        <h2 class="sb-title">Links</h2>
+        <div style="font-size: 9pt;">
+          <a href="https://linkedin.com/in/raynner-bernardes" target="_blank">LinkedIn</a><br>
+          <a href="https://github.com/Raynber" target="_blank">GitHub</a>
+        </div>
+      </section>
     </aside>
 
-    <main class="content">
-      <section class="block">
-        <h2>Experiência (continuação)</h2>
-
-        <div class="job">
-          <div class="top">
-            <div>
-              <div class="title">Desenvolvedor Back-End</div>
-              <div class="company">Empresa C</div>
-            </div>
-            <div class="date">2019 - 2021</div>
+    <section class="main">
+      <section class="section">
+        <h2 class="title">Experiência Anterior</h2>
+        <article class="job">
+          <div class="job-head">
+            <p class="job-title">Se7e Sistemas — Gestor Comercial</p>
+            <p class="job-date">2016–2022</p>
           </div>
           <ul>
-            <li>Desenvolvimento de APIs e serviços com foco em escalabilidade.</li>
-            <li>Modelagem de banco de dados e otimização de queries.</li>
-            <li>Monitoramento e correção de incidentes em produção.</li>
+            <li>Implementação de sistemas e levantamento de requisitos.</li>
+            <li>Gestão de relacionamento e alinhamento técnico-negócio.</li>
           </ul>
-        </div>
+        </article>
 
-        <div class="job">
-          <div class="top">
-            <div>
-              <div class="title">Estagiário em Desenvolvimento</div>
-              <div class="company">Empresa D</div>
-            </div>
-            <div class="date">2018 - 2019</div>
+        <article class="job">
+          <div class="job-head">
+            <p class="job-title">World Tênis — Suporte Infra</p>
+            <p class="job-date">2012–2014</p>
           </div>
           <ul>
-            <li>Apoio no desenvolvimento de funcionalidades e correção de bugs.</li>
-            <li>Criação de páginas em HTML/CSS e automações simples.</li>
+            <li>Manutenção de servidores, redes e CFTV.</li>
           </ul>
+        </article>
+      </section>
+
+      <section class="section">
+        <h2 class="title">Formação Acadêmica</h2>
+        <div class="edu">
+          <b>ADS — Estácio</b>
+          <span>2024–2026</span>
+        </div>
+        <div class="edu">
+          <b>Sistemas de Informação — Camburi</b>
+          <span>2013–2015</span>
         </div>
       </section>
-
-      <section class="block">
-        <h2>Formação</h2>
-        <div class="job" style="border-bottom:none; padding-bottom:0;">
-          <div class="top">
-            <div>
-              <div class="title">Bacharelado em Sistemas de Informação</div>
-              <div class="company">Instituição X</div>
-            </div>
-            <div class="date">2016 - 2020</div>
-          </div>
-          <ul>
-            <li>Ênfase em desenvolvimento de software, banco de dados e engenharia de requisitos.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="block">
-        <h2>Certificações</h2>
-        <p>Certificação 1 — Plataforma (Ano)</p>
-        <p>Certificação 2 — Plataforma (Ano)</p>
-      </section>
-
-      <section class="block" style="margin-bottom:0;">
-        <h2>Informações adicionais</h2>
-        <p>Disponível para trabalho remoto / híbrido. Interesse em projetos web, APIs e produtos digitais.</p>
-      </section>
-    </main>
-  </div>
+    </section>
+  </main>
 
 </body>
 </html>
