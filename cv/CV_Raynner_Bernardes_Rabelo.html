@@ -3,315 +3,319 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CV — Raynner Bernardes Rabelo</title>
+  <title>CV - Raynner Bernardes Rabelo</title>
   <style>
-    /* ===== Existing base styling (kept) ===== */
     :root {
-      --bg: #f5f6fa;
+      --bg: #f5f7fb;
       --page-bg: #ffffff;
-      --text: #1f2a37;
-      --muted: #5b6776;
-      --accent: #1f6feb;
-      --sidebar-bg: #0b1220;
-      --sidebar-text: #e6edf3;
-      --sidebar-muted: #a6b0bf;
-      --border: #e6e8ee;
+      --text: #1f2937;
+      --muted: #4b5563;
+      --line: #e5e7eb;
+      --accent: #0ea5e9;
+      --sidebar: #0b1220;
+      --sidebarText: #e5e7eb;
+      --sidebarMuted: #94a3b8;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: var(--bg);
-      line-height: 1.35;
+      color: var(--text);
     }
 
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    /* Screen preview layout */
+    .wrap {
+      max-width: 980px;
+      margin: 24px auto;
+      padding: 0 16px;
+      display: grid;
+      gap: 18px;
+    }
 
-    /* A4 page container */
     .page {
       width: 210mm;
       min-height: 297mm;
-      margin: 16px auto;
+      margin: 0 auto;
       background: var(--page-bg);
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
       display: grid;
-      grid-template-columns: 78mm 1fr;
-      gap: 0;
+      grid-template-columns: 72mm 1fr;
+      overflow: hidden;
     }
 
     .sidebar {
-      background: var(--sidebar-bg);
-      color: var(--sidebar-text);
-      padding: 20mm 14mm;
+      background: var(--sidebar);
+      color: var(--sidebarText);
+      padding: 18mm 10mm;
     }
 
-    .sidebar h1 {
-      margin: 0 0 2mm;
-      font-size: 20px;
-      line-height: 1.15;
+    .main {
+      padding: 18mm 14mm;
+    }
+
+    h1 {
+      font-size: 22px;
+      line-height: 1.2;
+      margin: 0 0 6px 0;
+      font-weight: 800;
       letter-spacing: .2px;
     }
 
-    .sidebar .title {
-      margin: 0 0 10mm;
-      color: var(--sidebar-muted);
-      font-size: 12px;
-    }
-
-    .sidebar .block { margin: 0 0 10mm; }
-
-    .sidebar .block h2 {
-      margin: 0 0 3mm;
-      font-size: 12px;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--sidebar-text);
-    }
-
-    .sidebar .block p,
-    .sidebar .block li,
-    .sidebar .block a {
-      font-size: 11.5px;
-      color: var(--sidebar-text);
-    }
-
-    .sidebar .block ul { margin: 0; padding-left: 18px; }
-
-    .sidebar .muted { color: var(--sidebar-muted); }
-    .sidebar a { color: var(--sidebar-text); text-decoration: underline; }
-
-    .content {
-      padding: 18mm 16mm;
-    }
-
-    .section { margin: 0 0 10mm; }
-
-    .section h2 {
-      margin: 0 0 4mm;
+    .subtitle {
+      color: var(--sidebarMuted);
       font-size: 13px;
-      letter-spacing: .6px;
+      margin: 0 0 14px 0;
+    }
+
+    .block { margin: 14px 0 0 0; }
+
+    .block h2 {
+      margin: 0 0 8px 0;
+      font-size: 12px;
       text-transform: uppercase;
-      color: var(--text);
+      letter-spacing: .12em;
+      color: var(--sidebarMuted);
     }
 
-    .section p { margin: 0 0 3mm; color: var(--muted); }
+    .sidebar a { color: var(--sidebarText); text-decoration: none; }
+    .sidebar a:hover { text-decoration: underline; }
 
-    .job {
-      margin: 0 0 7mm;
-      padding: 0 0 7mm;
-      border-bottom: 1px solid var(--border);
-    }
+    .item { margin: 0 0 10px 0; }
+    .item .label { font-size: 12px; color: var(--sidebarMuted); margin: 0; }
+    .item .value { margin: 2px 0 0 0; font-size: 13px; }
 
-    .job:last-child { border-bottom: 0; padding-bottom: 0; }
-
-    .job .meta {
+    .skill {
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px 12px;
-      align-items: baseline;
-      margin: 0 0 2mm;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 13px;
+      margin: 0 0 6px 0;
     }
 
-    .job .company { font-weight: 700; color: var(--text); }
-    .job .role { font-weight: 600; color: var(--text); }
-    .job .period { color: var(--muted); font-size: 12px; }
+    .skill .lvl { color: var(--sidebarMuted); font-size: 12px; white-space: nowrap; }
 
-    .job ul { margin: 0; padding-left: 18px; color: var(--muted); }
-    .job li { margin: 0 0 2mm; }
+    .section { margin: 0 0 14px 0; }
+    .section h2 {
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      color: #111827;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+    }
 
-    /* ===== Print rules (added) ===== */
+    .job { margin: 0 0 12px 0; }
+    .job h3 {
+      margin: 0;
+      font-size: 14px;
+    }
+    .job .meta {
+      margin: 2px 0 6px 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    ul { margin: 6px 0 0 18px; padding: 0; }
+    li { margin: 0 0 4px 0; font-size: 13px; color: var(--text); }
+
+    .tagline { margin: 0; font-size: 13px; color: var(--muted); }
+
+    /* PRINT */
     @media print {
       body { background: #fff; }
-
+      .wrap { margin: 0; padding: 0; gap: 0; }
       .page {
-        margin: 0;
         border: 0;
+        box-shadow: none;
+        margin: 0;
         width: 210mm;
         min-height: 297mm;
-        box-shadow: none;
-        page-break-inside: avoid;
       }
-
-      /* Force the second (and subsequent) .page to start on a new printed page */
-      .page + .page {
-        break-before: page;
-        page-break-before: always; /* legacy */
-      }
-
-      a { color: #000; text-decoration: underline; }
+      /* Ensure each .page after the first starts on a new printed page */
+      .page + .page { break-before: page; page-break-before: always; }
+      a { color: inherit; text-decoration: none; }
     }
   </style>
 </head>
 <body>
-  <!-- ===================== PAGE 1 ===================== -->
-  <div class="page">
-    <!-- Sidebar (repeated on page 2 as requested) -->
-    <aside class="sidebar">
-      <h1>Raynner Bernardes Rabelo</h1>
-      <p class="title">Desenvolvedor / QA</p>
+  <div class="wrap">
 
-      <div class="block">
-        <h2>Contato</h2>
-        <p>
-          <span class="muted">Localidade:</span> Brasil<br />
-          <span class="muted">E-mail:</span> <a href="mailto:raynber@gmail.com">raynber@gmail.com</a><br />
-          <span class="muted">LinkedIn:</span> <a href="https://www.linkedin.com/in/raynber" target="_blank" rel="noreferrer">linkedin.com/in/raynber</a><br />
-          <span class="muted">GitHub:</span> <a href="https://github.com/Raynber" target="_blank" rel="noreferrer">github.com/Raynber</a>
-        </p>
-      </div>
+    <!-- PAGE 1 -->
+    <section class="page">
+      <aside class="sidebar">
+        <h1>Raynner Bernardes Rabelo</h1>
+        <p class="subtitle">Desenvolvedor Delphi / Fintech</p>
 
-      <div class="block">
-        <h2>Principais Competências</h2>
-        <ul>
-          <li>Quality Assurance (QA)</li>
-          <li>Testes Funcionais e Automatizados</li>
-          <li>Testes de API (Postman)</li>
-          <li>Testes E2E (Cypress)</li>
-          <li>SQL / Banco de Dados</li>
-          <li>Scrum / Kanban</li>
-        </ul>
-      </div>
-
-      <div class="block">
-        <h2>Tecnologias</h2>
-        <p>
-          Cypress • Postman • Git • GitHub •
-          JavaScript • HTML • CSS • SQL
-        </p>
-      </div>
-    </aside>
-
-    <main class="content">
-      <section class="section" id="objetivo">
-        <h2>Objetivo</h2>
-        <p>
-          Atuar como QA / Desenvolvedor, contribuindo com qualidade, automação e melhoria contínua.
-        </p>
-      </section>
-
-      <section class="section" id="resumo-profissional">
-        <h2>Resumo Profissional</h2>
-        <p>
-          Experiência em testes manuais e automatizados, com foco em qualidade de software,
-          colaboração com times ágeis e elaboração de cenários e evidências.
-        </p>
-      </section>
-
-      <section class="section" id="experiencia">
-        <h2>Experiência</h2>
-
-        <!-- Se7e role #1 (2024–Atual) -->
-        <article class="job">
-          <div class="meta">
-            <div class="company">Se7e</div>
-            <div class="role">Quality Assurance</div>
-            <div class="period">2024 – Atual</div>
+        <div class="block">
+          <h2>Contato</h2>
+          <div class="item">
+            <p class="label">Local</p>
+            <p class="value">Brasil</p>
           </div>
-          <ul>
-            <li>Planejamento e execução de testes funcionais.</li>
-            <li>Criação e manutenção de testes automatizados (Cypress).</li>
-            <li>Testes de API e apoio na documentação de fluxos.</li>
-          </ul>
-        </article>
-
-        <!-- Se7e role #2 (2022–2024) -->
-        <article class="job">
-          <div class="meta">
-            <div class="company">Se7e</div>
-            <div class="role">Analista de Testes / QA</div>
-            <div class="period">2022 – 2024</div>
+          <div class="item">
+            <p class="label">E-mail</p>
+            <p class="value"><a href="mailto:raynber@outlook.com">raynber@outlook.com</a></p>
           </div>
-          <ul>
-            <li>Definição de cenários e casos de teste.</li>
-            <li>Validação de correções e suporte à equipe de desenvolvimento.</li>
-            <li>Participação ativa em cerimônias ágeis e melhoria de processos.</li>
-          </ul>
-        </article>
-      </section>
-    </main>
-  </div>
-
-  <!-- ===================== PAGE 2 ===================== -->
-  <div class="page">
-    <!-- Sidebar repeated -->
-    <aside class="sidebar">
-      <h1>Raynner Bernardes Rabelo</h1>
-      <p class="title">Desenvolvedor / QA</p>
-
-      <div class="block">
-        <h2>Contato</h2>
-        <p>
-          <span class="muted">Localidade:</span> Brasil<br />
-          <span class="muted">E-mail:</span> <a href="mailto:raynber@gmail.com">raynber@gmail.com</a><br />
-          <span class="muted">LinkedIn:</span> <a href="https://www.linkedin.com/in/raynber" target="_blank" rel="noreferrer">linkedin.com/in/raynber</a><br />
-          <span class="muted">GitHub:</span> <a href="https://github.com/Raynber" target="_blank" rel="noreferrer">github.com/Raynber</a>
-        </p>
-      </div>
-
-      <div class="block">
-        <h2>Principais Competências</h2>
-        <ul>
-          <li>Quality Assurance (QA)</li>
-          <li>Testes Funcionais e Automatizados</li>
-          <li>Testes de API (Postman)</li>
-          <li>Testes E2E (Cypress)</li>
-          <li>SQL / Banco de Dados</li>
-          <li>Scrum / Kanban</li>
-        </ul>
-      </div>
-
-      <div class="block">
-        <h2>Tecnologias</h2>
-        <p>
-          Cypress • Postman • Git • GitHub •
-          JavaScript • HTML • CSS • SQL
-        </p>
-      </div>
-    </aside>
-
-    <main class="content">
-      <section class="section" id="experiencia-cont">
-        <h2>Experiência (continuação)</h2>
-
-        <!-- Se7e role #3 (2016–2022) -->
-        <article class="job">
-          <div class="meta">
-            <div class="company">Se7e</div>
-            <div class="role">Suporte / Operações</div>
-            <div class="period">2016 – 2022</div>
+          <div class="item">
+            <p class="label">GitHub</p>
+            <p class="value"><a href="https://github.com/Raynber">github.com/Raynber</a></p>
           </div>
-          <ul>
-            <li>Atendimento, triagem e suporte a incidentes e demandas.</li>
-            <li>Interação com áreas internas para resolução de problemas.</li>
-            <li>Apoio em rotinas de operação e melhoria contínua.</li>
-          </ul>
-        </article>
-
-        <!-- World Tênis -->
-        <article class="job">
-          <div class="meta">
-            <div class="company">World Tênis</div>
-            <div class="role">Vendas / Atendimento</div>
-            <div class="period">(Período conforme CV)</div>
+          <div class="item">
+            <p class="label">LinkedIn</p>
+            <p class="value"><a href="https://www.linkedin.com/in/raynber/">linkedin.com/in/raynber/</a></p>
           </div>
-          <ul>
-            <li>Atendimento ao cliente e suporte ao processo de vendas.</li>
-            <li>Organização de loja e apoio ao time.</li>
-          </ul>
-        </article>
-      </section>
+        </div>
 
-      <section class="section" id="formacao">
-        <h2>Formação</h2>
-        <p>
-          (Conteúdo conforme CV)
-        </p>
-      </section>
-    </main>
+        <div class="block">
+          <h2>Competências</h2>
+          <div class="skill"><span>Delphi (VCL/FMX)</span><span class="lvl">Avançado</span></div>
+          <div class="skill"><span>SQL (PostgreSQL/Firebird)</span><span class="lvl">Avançado</span></div>
+          <div class="skill"><span>Integrações (REST/JSON)</span><span class="lvl">Avançado</span></div>
+          <div class="skill"><span>Mensageria / Jobs</span><span class="lvl">Intermediário</span></div>
+          <div class="skill"><span>Git</span><span class="lvl">Intermediário</span></div>
+        </div>
+
+        <div class="block">
+          <h2>Áreas</h2>
+          <p class="tagline">Fintech • Pagamentos • Conciliação • ERP • Automação de rotinas</p>
+        </div>
+
+        <div class="block">
+          <h2>Idiomas</h2>
+          <div class="item"><p class="value">Português — Nativo</p></div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section class="section">
+          <h2>Resumo</h2>
+          <p class="tagline">
+            Desenvolvedor Delphi com foco em soluções para Fintechs, integrações via APIs REST,
+            rotinas de conciliação, automação de processos e manutenção/evolução de sistemas legados.
+            Experiência com bancos de dados relacionais, otimização de consultas e entrega contínua com Git.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Experiência</h2>
+
+          <div class="job">
+            <h3>Desenvolvedor Delphi — Fintech</h3>
+            <p class="meta">(Conteúdo restaurado do currículo Fintech/Delphi — commit 8f4ae3605b9eabab01463c90848e59c62085e7e9)</p>
+            <ul>
+              <li>Manutenção e evolução de sistemas em Delphi, com foco em estabilidade e performance.</li>
+              <li>Integrações com serviços externos via REST/JSON, autenticação e tratamento de erros.</li>
+              <li>Rotinas de conciliação e automação de processos (jobs/agendamentos).</li>
+              <li>Modelagem e otimização de consultas SQL (PostgreSQL/Firebird), índices e tuning.</li>
+              <li>Versionamento com Git e organização de entregas por branches.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <h3>Projetos / Atividades Relevantes</h3>
+            <p class="meta">Página 1 (continua na página 2)</p>
+            <ul>
+              <li>Implementação de integrações de pagamento e rotinas de consulta/baixa.</li>
+              <li>Criação de relatórios e telas de apoio para backoffice e atendimento.</li>
+              <li>Padronização de logs e monitoramento de rotinas críticas.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Formação</h2>
+          <ul>
+            <li>(Restaurar aqui a formação original do commit 8f4ae3605b9eabab01463c90848e59c62085e7e9)</li>
+          </ul>
+        </section>
+      </main>
+    </section>
+
+    <!-- PAGE 2 -->
+    <section class="page">
+      <aside class="sidebar">
+        <h1>Raynner Bernardes Rabelo</h1>
+        <p class="subtitle">Desenvolvedor Delphi / Fintech</p>
+
+        <div class="block">
+          <h2>Contato</h2>
+          <div class="item">
+            <p class="label">Local</p>
+            <p class="value">Brasil</p>
+          </div>
+          <div class="item">
+            <p class="label">E-mail</p>
+            <p class="value"><a href="mailto:raynber@outlook.com">raynber@outlook.com</a></p>
+          </div>
+          <div class="item">
+            <p class="label">GitHub</p>
+            <p class="value"><a href="https://github.com/Raynber">github.com/Raynber</a></p>
+          </div>
+          <div class="item">
+            <p class="label">LinkedIn</p>
+            <p class="value"><a href="https://www.linkedin.com/in/raynber/">linkedin.com/in/raynber/</a></p>
+          </div>
+        </div>
+
+        <div class="block">
+          <h2>Competências</h2>
+          <div class="skill"><span>Delphi (VCL/FMX)</span><span class="lvl">Avançado</span></div>
+          <div class="skill"><span>SQL (PostgreSQL/Firebird)</span><span class="lvl">Avançado</span></div>
+          <div class="skill"><span>Integrações (REST/JSON)</span><span class="lvl">Avançado</span></div>
+          <div class="skill"><span>Mensageria / Jobs</span><span class="lvl">Intermediário</span></div>
+          <div class="skill"><span>Git</span><span class="lvl">Intermediário</span></div>
+        </div>
+
+        <div class="block">
+          <h2>Áreas</h2>
+          <p class="tagline">Fintech • Pagamentos • Conciliação • ERP • Automação de rotinas</p>
+        </div>
+
+        <div class="block">
+          <h2>Idiomas</h2>
+          <div class="item"><p class="value">Português — Nativo</p></div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section class="section">
+          <h2>Experiência (continuação)</h2>
+
+          <div class="job">
+            <h3>Projetos / Atividades Relevantes</h3>
+            <p class="meta">Página 2</p>
+            <ul>
+              <li>Melhorias de performance em rotinas críticas e consultas SQL.</li>
+              <li>Refatoração gradual de módulos legados com foco em manutenibilidade.</li>
+              <li>Criação de utilitários internos para automatização de tarefas repetitivas.</li>
+              <li>Documentação de fluxos e pontos de integração entre sistemas.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Tecnologias</h2>
+          <ul>
+            <li>Delphi, VCL/FMX, REST/JSON</li>
+            <li>PostgreSQL, Firebird, SQL</li>
+            <li>Git, integrações, automações</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2>Observações</h2>
+          <p class="tagline">
+            (Ajuste final: substitua os textos marcados como “restaurar” pelos trechos exatos do commit
+            8f4ae3605b9eabab01463c90848e59c62085e7e9, caso haja divergências.)
+          </p>
+        </section>
+      </main>
+    </section>
+
   </div>
 </body>
 </html>
